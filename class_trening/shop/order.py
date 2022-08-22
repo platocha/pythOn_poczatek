@@ -18,16 +18,29 @@ class Order:
             total_price += element.calculate_price()
         return total_price
 
-    def print_self(self):
-        print("="*20)
-        print(f"Zamowienie zlozone przez: {self.first_name} {self.last_name}")
-        print(f"O lacznej wartosci: {self.total_price} PLN")
-        print(f"Zamowione produkty:")
+    def __str__(self):
+        return_string = "="*20+"\n"
+        return_string += f"Zamowienie zlozone przez: {self.first_name} {self.last_name}\n"
+        return_string += f"O lacznej wartosci: {self.total_price} PLN\n"
+        return_string += f"Zamowione produkty:\n"
         for element in self.order_elements:
-            print("\t", end="")
-            element.print_self()
-        print("="*20)
-        print()
+            return_string += f"\t{element}"
+        return_string += "\n" + "=" * 20 + "\n"
+        return return_string
+
+    def __len__(self):
+        return len(self.order_elements)
+
+    def __eq__(self, other):
+        if self.__class__ != other.__class__:
+            return NotImplemented
+        else:
+            for element in self.order_elements:
+                if element not in other.order_elements:
+                    return False
+            return (self.first_name == other.firstname and
+                    self.last_name == other.last_name and
+                    len(self.order_elements) == len(other.order_elements))
 
 def generate_order():
     number_of_products = random.randint(1,10)

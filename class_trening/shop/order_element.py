@@ -6,6 +6,12 @@ class OrderElement:
     def calculate_price(self):
         return self.product.price * self.quantity
 
-    def print_self(self):
-        self.product.print_self()
-        print(f"\t\t x {self.quantity}")
+    def __str__(self):
+        return f"{self.product}\t\t x {self.quantity}\n"
+
+    def __eq__(self, other):
+        if self.__class__ != other.__class__:
+            return NotImplemented
+        else:
+            return (self.product == other.product and
+                    self.quantity == other.quantity)

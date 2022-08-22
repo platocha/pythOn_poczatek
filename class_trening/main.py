@@ -4,10 +4,14 @@ from shop.potato import Potato
 
 def run_homework():
     first_order = generate_order()
-    first_order.print_self()
+    print(first_order)
     second_order = generate_order()
-    second_order.print_self()
-
+    print(second_order)
+    # old_potato = Potato(species="Old Potato", size="S", price=0.2)
+    # print(old_potato)
+    # red_apple = Apple(species="Red", size="M", price=2.5)
+    # print(red_apple)
+    # print(len(first_order))
 
 if __name__ == '__main__':
     run_homework()
