@@ -6,3 +6,4 @@ class Product:
 
     def print_self(self):
         print(f"Nazwa: {self.name} | Kategoria: {self.category} | Cena: {self.price}/szt")
+
