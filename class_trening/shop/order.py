@@ -14,16 +14,16 @@ class Order:
             total_price += product.price
         self.total_price = total_price
 
-def print_order(order):
-    print("="*20)
-    print(f"Zamowienie zlozone przez: {order.first_name} {order.last_name}")
-    print(f"O lacznej wartosci: {order.total_price} PLN")
-    print(f"Zamowione produkty:")
-    for product in order.product_list:
-        print("\t", end="")
-        print_product(product)
-    print("="*20)
-    print()
+    def print_self(self):
+        print("="*20)
+        print(f"Zamowienie zlozone przez: {self.first_name} {self.last_name}")
+        print(f"O lacznej wartosci: {self.total_price} PLN")
+        print(f"Zamowione produkty:")
+        for product in self.product_list:
+            print("\t", end="")
+            print_product(product)
+        print("="*20)
+        print()
 
 def generate_order():
     number_of_products = random.randint(1,10)

@@ -3,3 +3,6 @@ class Apple:
         self.species = species
         self.size = size
         self.price = price
+
+    def calculate_total_price(self, quantity):
+        return self.price * quantity
