@@ -1,11 +1,11 @@
 from shop.apple import Apple
-from shop.order import generate_order
+from shop.order import Order
 from shop.potato import Potato
 
 def run_homework():
-    first_order = generate_order()
+    first_order = Order.generate_order(10)
     print(first_order)
-    second_order = generate_order()
+    second_order = Order.generate_order(5)
     print(second_order)
     # old_potato = Potato(species="Old Potato", size="S", price=0.2)
     # print(old_potato)
