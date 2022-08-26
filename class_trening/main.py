@@ -11,7 +11,7 @@ def run_homework():
     for _ in range(5):
         orders.append(Order.generate_order(random.randint(1,8)))
 
-    orders.sort(key=get_order_price)
+    orders.sort(key=lambda order: order.total_price)
     for order in orders:
         print(order)
 
