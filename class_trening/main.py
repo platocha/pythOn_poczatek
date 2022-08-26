@@ -9,7 +9,7 @@ def get_order_price(order):
 def run_homework():
     orders = []
     for _ in range(5):
-        orders.append(Order.generate_order(random.randint(1,30)))
+        orders.append(Order.generate_order(random.randint(1,8)))
 
     orders.sort(key=get_order_price)
     for order in orders:

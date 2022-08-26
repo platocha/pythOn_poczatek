@@ -1,26 +1,33 @@
 import random
 
+from discount_policy import default_policy
 from order_element import OrderElement
 from product import Product
 
 class Order:
 
     MAX_ELEMENTS_NUMBER = 20
-    def __init__(self, first_name, last_name, order_elements=None):
+    def __init__(self, first_name, last_name, order_elements=None, discount_policy=None):
         self.first_name = first_name
         self.last_name = last_name
+
         if order_elements is None:
             order_elements = []
+
         if len(order_elements) > Order.MAX_ELEMENTS_NUMBER:
             order_elements = order_elements[:Order.MAX_ELEMENTS_NUMBER]
         self.__order_elements = order_elements
+
+        if discount_policy is None:
+            discount_policy = default_policy
+        self.discount_policy = discount_policy
         self.total_price = self.__calculate_total_price()
 
     def __calculate_total_price(self):
         total_price = 0
         for element in self.__order_elements:
             total_price += element.calculate_price()
-        return total_price
+        return self.discount_policy(total_price)
 
     def add_to_order(self, product, quantity):
         if len(self.__order_elements) < Order.MAX_ELEMENTS_NUMBER:
