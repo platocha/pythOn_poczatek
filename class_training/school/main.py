@@ -7,8 +7,13 @@ def run_example():
     students.sort(key=lambda student: student.grades_avg, reverse=True)
     school = School(name="Hogwart", students=students)
 
-    print(f"Najlepszy uczen: {school.best_student}")
-    print(f"Oceny najlepszego ucznia: {school.best_student.final_grades}")
+    new_students = data_generator.generate_students(number_of_students=8)
+    school.students = new_students
+    print(school)
+
+    # too_many_students = data_generator.generate_students(number_of_students=100)
+    # school.students = too_many_students
+    # print(school)
 
 if __name__ == '__main__':
     run_example()
