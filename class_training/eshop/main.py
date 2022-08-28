@@ -1,6 +1,4 @@
-from shop.apple import Apple
 from shop.order import Order
-from shop.potato import Potato
 import random
 
 def get_order_price(order):
