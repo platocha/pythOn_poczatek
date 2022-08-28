@@ -29,3 +29,10 @@ class School:
     @property
     def students(self):
         return self._students
+
+    @property
+    def best_student(self):
+        if len(self._students):
+            return sorted(self._students, key=lambda student: student.grades_avg, reverse=True)[0]
+        return None
+
