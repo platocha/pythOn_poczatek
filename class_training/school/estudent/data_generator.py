@@ -1,8 +1,8 @@
 import random
 
-from config import Config
-from school import School
-from student import Student
+from estudent.config import Config
+from estudent.school import School
+from estudent.student import Student
 
 
 def generate_students(number_of_students=None):

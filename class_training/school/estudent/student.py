@@ -1,5 +1,5 @@
-from grade import Grade
-from grade_calculator import GradeCalculator
+from estudent.grade import Grade
+from estudent.grade_calculator import GradeCalculator
 
 class Student:
 
@@ -26,3 +26,7 @@ class Student:
             self.promoted = True
         else:
             self.promoted = False
+
+    @property
+    def final_grades(self):
+        return self._final_grades
