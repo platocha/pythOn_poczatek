@@ -4,7 +4,7 @@ class School:
 
     def __init__(self, name, students):
         self.name = name
-        self.students = students
+        self._students = students
         self._promote_lucky_students()
 
     def _promote_lucky_students(self):
@@ -25,3 +25,14 @@ class School:
             self.students.append(student)
         else:
             print("Nie ma juz miejsca!")
+
+    def __str__(self):
+        students = ""
+        for student in self._students:
+            students += "\n"
+            students += str(student)
+        return f"Szkola: {self.name}, z {len(self.students)} uczniami: {students}"
+
+    @property
+    def students(self):
+        return self._students
