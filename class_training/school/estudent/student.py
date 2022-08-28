@@ -12,6 +12,7 @@ class Student:
     def __str__(self):
         return f"Student: {self.first_name} {self.last_name}, promowany: {self.promoted}, srednia: {self.grades_avg():.2f}"
 
+    @property
     def grades_avg(self):
         return GradeCalculator.calculate_student_avg(self._final_grades)
 

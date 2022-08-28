@@ -21,17 +21,10 @@ class School:
         return f"Szkola: {self.name}, z {len(self.students)} uczniami: {students}"
 
     def assign_student(self, student):
-        if len(self.students) < School.MAX_STUDENTS_NUMBER:
-            self.students.append(student)
+        if len(self._students) < School.MAX_STUDENTS_NUMBER:
+            self._students.append(student)
         else:
             print("Nie ma juz miejsca!")
-
-    def __str__(self):
-        students = ""
-        for student in self._students:
-            students += "\n"
-            students += str(student)
-        return f"Szkola: {self.name}, z {len(self.students)} uczniami: {students}"
 
     @property
     def students(self):
