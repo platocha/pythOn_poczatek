@@ -31,7 +31,6 @@ class BioChemDepartment(Department):
                 self.students.append(student)
                 return True
             else:
-                print("Za slabe oceny :-/")
                 return False
         else:
             print("Nie ma juz miejsca")
@@ -49,7 +48,6 @@ class MathPhysicsDepartment(Department):
                 self.students.append(student)
                 return True
             else:
-                print("Za slabe oceny :-/")
                 return False
         else:
             print("Nie ma juz miejsca")

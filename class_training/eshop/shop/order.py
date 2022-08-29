@@ -1,4 +1,4 @@
-from shop.discount_policy import default_policy
+from shop.discount_policy import DiscountPolicy
 
 class Order:
 
@@ -15,7 +15,7 @@ class Order:
         self._order_elements = order_elements
 
         if discount_policy is None:
-            discount_policy = default_policy
+            discount_policy = DiscountPolicy()
         self.discount_policy = discount_policy
 
     @property
@@ -23,7 +23,7 @@ class Order:
         total_price = 0
         for element in self._order_elements:
             total_price += element.calculate_price()
-        return self.discount_policy(total_price)
+        return self.discount_policy.apply_discount(total_price)
 
     @property
     def order_elements(self):
@@ -74,7 +74,7 @@ class ExpressOrder(Order):
         total_price = 0
         for element in self._order_elements:
             total_price += element.calculate_price()
-        return self.discount_policy(total_price) + ExpressOrder.EXPRESS_DELIVERY_FEE
+        return self.discount_policy.apply_discount(total_price) + ExpressOrder.EXPRESS_DELIVERY_FEE
 
     def __str__(self):
         return_string = "=" * 20 + "\n"
