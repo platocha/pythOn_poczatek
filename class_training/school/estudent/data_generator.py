@@ -16,8 +16,9 @@ def generate_students(number_of_students=None):
         last_name = "Smith"
         student = Student(first_name, last_name)
         students.append(student)
-        for _ in range(Config.RANDOM_FINAL_GRADES_NUMBER):
+        subjects = ["Matematyka", "Fizyka", "Biologia", "Chemia", "Historia"]
+        for subject in subjects:
             final_grade = random.randint(Config.MIN_RANDOM_GRADE, Config.MAX_RANDOM_GRADE)
-            student.add_final_grade(final_grade)
+            student.add_final_grade(final_grade, subject)
 
     return students

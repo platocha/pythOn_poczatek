@@ -10,3 +10,11 @@ class Grade:
 
     def __repr__(self):
         return str(self.value)
+
+class FinalGrade(Grade):
+    def __init__(self, value, subject):
+        super().__init__(value)
+        self.subject = subject
+
+    def __repr__(self):
+        return f"{self.subject}: {self.value}"

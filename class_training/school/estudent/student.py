@@ -1,4 +1,4 @@
-from estudent.grade import Grade
+from estudent.grade import Grade, FinalGrade
 from estudent.grade_calculator import GradeCalculator
 
 class Student:
@@ -19,15 +19,21 @@ class Student:
     def promote(self):
         self.promoted = True
 
-    def add_final_grade(self, grade, check_promotion_policy=None):
+    @property
+    def final_grades(self):
+        return self._final_grades
+
+    def final_grade_from_subject(self, subject_name):
+        for final_grade in self._final_grades:
+            if final_grade.subject == subject_name:
+                return final_grade
+
+    def add_final_grade(self, grade, subject, check_promotion_policy=None):
         if check_promotion_policy is None:
             check_promotion_policy = GradeCalculator.normal_promotion_policy
-        self._final_grades.append(Grade(value=grade))
+        self._final_grades.append(FinalGrade(value=grade, subject=subject))
+
         if check_promotion_policy(self._final_grades):
             self.promoted = True
         else:
             self.promoted = False
-
-    @property
-    def final_grades(self):
-        return self._final_grades
