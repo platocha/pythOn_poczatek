@@ -12,7 +12,7 @@ class Order:
 
         if len(order_elements) > Order.MAX_ELEMENTS_NUMBER:
             order_elements = order_elements[:Order.MAX_ELEMENTS_NUMBER]
-        self.__order_elements = order_elements
+        self._order_elements = order_elements
 
         if discount_policy is None:
             discount_policy = default_policy
@@ -21,13 +21,13 @@ class Order:
     @property
     def total_price(self):
         total_price = 0
-        for element in self.__order_elements:
+        for element in self._order_elements:
             total_price += element.calculate_price()
         return self.discount_policy(total_price)
 
     @property
     def order_elements(self):
-        return self.__order_elements
+        return self._order_elements
 
     @order_elements.setter
     def order_elements(self, value):
@@ -42,21 +42,47 @@ class Order:
         return_string += f"Zamowienie zlozone przez: {self.first_name} {self.last_name}\n"
         return_string += f"O lacznej wartosci: {self.total_price} PLN\n"
         return_string += f"Zamowione produkty:\n"
-        for element in self.__order_elements:
+        for element in self._order_elements:
             return_string += f"\t{element}"
         return_string += "\n" + "=" * 20 + "\n"
         return return_string
 
     def __len__(self):
-        return len(self.__order_elements)
+        return len(self._order_elements)
 
     def __eq__(self, other):
         if self.__class__ != other.__class__:
             return NotImplemented
         else:
-            for element in self.__order_elements:
+            for element in self._order_elements:
                 if element not in other.order_elements:
                     return False
             return (self.first_name == other.firstname and
                     self.last_name == other.last_name and
-                    len(self.__order_elements) == len(other.order_elements))
+                    len(self._order_elements) == len(other.order_elements))
+
+class ExpressOrder(Order):
+
+    EXPRESS_DELIVERY_FEE = 10
+
+    def __init__(self, first_name, last_name, order_date, order_elements=None, discount_policy=None):
+        super().__init__(first_name, last_name, order_elements, discount_policy)
+        self.order_date = order_date
+
+    @property
+    def total_price(self):
+        total_price = 0
+        for element in self._order_elements:
+            total_price += element.calculate_price()
+        return self.discount_policy(total_price) + ExpressOrder.EXPRESS_DELIVERY_FEE
+
+    def __str__(self):
+        return_string = "=" * 20 + "\n"
+        return_string += f"Zamowienie zlozone przez: {self.first_name} {self.last_name}\n"
+        return_string += f"O lacznej wartosci: {self.total_price} PLN (Dodatkowa oplata: {self.EXPRESS_DELIVERY_FEE} PLN)\n"
+        return_string += f"Data dostawy: {self.order_date}\n"
+        return_string += f"Zamowione produkty:\n"
+        for element in self.order_elements:
+            return_string += f"\t{element}"
+        return_string += "\n" + "=" * 20 + "\n"
+        return return_string
