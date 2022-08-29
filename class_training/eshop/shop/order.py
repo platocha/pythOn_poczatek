@@ -71,10 +71,7 @@ class ExpressOrder(Order):
 
     @property
     def total_price(self):
-        total_price = 0
-        for element in self._order_elements:
-            total_price += element.calculate_price()
-        return self.discount_policy.apply_discount(total_price) + ExpressOrder.EXPRESS_DELIVERY_FEE
+        return super().total_price + ExpressOrder.EXPRESS_DELIVERY_FEE
 
     def __str__(self):
         return_string = "=" * 20 + "\n"
