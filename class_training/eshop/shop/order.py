@@ -1,8 +1,4 @@
-import random
-
 from shop.discount_policy import default_policy
-from shop.order_element import OrderElement
-from shop.product import Product
 
 class Order:
 
@@ -21,21 +17,25 @@ class Order:
         if discount_policy is None:
             discount_policy = default_policy
         self.discount_policy = discount_policy
-        self.total_price = self.__calculate_total_price()
 
-    def __calculate_total_price(self):
+    @property
+    def total_price(self):
         total_price = 0
         for element in self.__order_elements:
             total_price += element.calculate_price()
         return self.discount_policy(total_price)
 
-    def add_to_order(self, product, quantity):
-        if len(self.__order_elements) < Order.MAX_ELEMENTS_NUMBER:
-            new_element = OrderElement(product, quantity)
-            self.__order_elements.append(new_element)
-            self.total_price = self.__calculate_total_price()
+    @property
+    def order_elements(self):
+        return self.__order_elements
+
+    @order_elements.setter
+    def order_elements(self, value):
+        if len(value) < Order.MAX_ELEMENTS_NUMBER:
+            self.order_elements = value
         else:
-            print("Osiagnieto limit pozycji w zamowieniu.")
+            print("Nie ma juz miejsca!")
+            self.order_elements = value[:Order.MAX_ELEMENTS_NUMBER]
 
     def __str__(self):
         return_string = "="*20+"\n"
