@@ -15,3 +15,12 @@ class Product:
                     self.category == other.category and
                     self.price == other.price)
 
+class ProductExpiration(Product):
+
+    def __init__(self, name, category, price, production_year, expiration_years):
+        super().__init__(name, category, price)
+        self.production_year = production_year
+        self.expiration_years = expiration_years
+
+    def does_expire(self, current_year):
+        return current_year > self.production_year + self.expiration_years
