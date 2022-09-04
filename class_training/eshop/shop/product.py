@@ -1,11 +1,12 @@
 class Product:
-    def __init__(self, name, category, price):
+    def __init__(self, name, category, price, identifier):
         self.name = name
         self.category = category
         self.price = price
+        self.identifier = identifier
 
     def __str__(self):
-        return(f"Nazwa: {self.name} | Kategoria: {self.category} | Cena: {self.price}/szt")
+        return(f"ID: {self.identifier} | Nazwa: {self.name} | Kategoria: {self.category} | Cena: {self.price}/szt")
 
     def __eq__(self, other):
         if self.__class__ != other.__class__:
