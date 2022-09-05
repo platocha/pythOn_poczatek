@@ -12,14 +12,14 @@ class Product:
         if self.__class__ != other.__class__:
             return NotImplemented
         else:
-            return (self.name == other.name and \
+            return (self.name == other.name and
                     self.category == other.category and
                     self.price == other.price)
 
 class ProductExpiration(Product):
 
-    def __init__(self, name, category, price, production_year, expiration_years):
-        super().__init__(name, category, price)
+    def __init__(self, name, category, price, identifier, production_year, expiration_years):
+        super().__init__(name, category, price, identifier)
         self.production_year = production_year
         self.expiration_years = expiration_years
 

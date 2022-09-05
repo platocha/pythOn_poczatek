@@ -1,11 +1,11 @@
+from dataclasses import dataclass
+
+
+@dataclass
 class Potato:
-    def __init__(self, species, size, price):
-        self.species = species
-        self.size = size
-        self.price = price
+    species: str
+    size: str
+    price: float
 
     def calculate_total_price(self, quantity):
         return self.price * quantity
-
-    def __repr__(self):
-        return f"Gatunek: {self.species} | Rozmiar: {self.size} | Cena: {self.price}"
