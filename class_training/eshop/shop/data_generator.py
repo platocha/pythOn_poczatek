@@ -1,7 +1,7 @@
 import random
 
 from shop.order import Order
-from shop.product import Product
+from shop.product import Product, ProductCategory
 from shop.order_element import OrderElement
 
 MIN_QUANTITY = 1
@@ -17,9 +17,9 @@ def generate_order_elements(number_of_products=None):
     order_elements = []
     for product_number in range(number_of_products):
         product_name = f"Produkt-{product_number}"
-        category_name = "Inne"
+        category = ProductCategory.OTHER
         unit_price = random.randint(MIN_UNIT_PRICE, MAX_UNIT_PRICE)
-        product = Product(product_name, category_name, unit_price, random.randint(1, 1000))
+        product = Product(product_name, category, unit_price, random.randint(1, 1000))
         quantity = random.randint(MIN_QUANTITY, MAX_QUANTITY)
         order_elements.append(OrderElement(product, quantity))
 

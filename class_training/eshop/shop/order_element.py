@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-
+@dataclass
 class OrderElement:
     product: str
     quantity: int
