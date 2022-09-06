@@ -54,8 +54,9 @@ class School:
         if len(value) < School.MAX_STUDENTS_NUMBER:
             self._students = value
         else:
-            print("Nie ma juz miejsca!")
-            self._students = value[:School.MAX_STUDENTS_NUMBER]
+            raise Exception(
+                f"W szkole jest tylko {School.MAX_STUDENTS_NUMBER} miejsc, nie mozna przypisac {len(value)} uczniow"
+            )
         self.departments = self._split_students_to_departments()
 
     @property
