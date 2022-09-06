@@ -17,6 +17,10 @@ class School:
     def _split_students_to_departments(self):
         departments = {}
         departments_letters = ["A", "B", "C", "D", "E", "F"]
+        places_in_departments = len(departments_letters) * School.MAX_STUDENTS_PER_DEPARTMENT
+        if places_in_departments < len(self._students):
+            raise Exception("Niewystarczajaca liczba miejsc w klasach!")
+
         current_department_number = -1
         for index, student in enumerate(self.students):
 
@@ -38,12 +42,6 @@ class School:
                 result += f"{student}\n"
 
         return f"Szkola: {self.name}, z {len(self.students)} uczniami: {result}"
-
-    # def assign_student(self, student):
-    #     if len(self._students) < School.MAX_STUDENTS_NUMBER:
-    #         self._students.append(student)
-    #     else:
-    #         print("Nie ma juz miejsca!")
 
     @property
     def students(self):
