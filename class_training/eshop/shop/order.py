@@ -1,4 +1,5 @@
 from shop.discount_policy import DiscountPolicy
+from shop.order_element import OrderElement
 
 class Order:
 
@@ -11,7 +12,7 @@ class Order:
             order_elements = []
 
         if len(order_elements) > Order.MAX_ELEMENTS_NUMBER:
-            order_elements = order_elements[:Order.MAX_ELEMENTS_NUMBER]
+            raise Exception(f"Zamowienie ma limit na {Order.MAX_ELEMENTS_NUMBER} elementow.")
         self._order_elements = order_elements
 
         if discount_policy is None:
@@ -34,8 +35,14 @@ class Order:
         if len(value) < Order.MAX_ELEMENTS_NUMBER:
             self.order_elements = value
         else:
-            print("Nie ma juz miejsca!")
-            self.order_elements = value[:Order.MAX_ELEMENTS_NUMBER]
+            raise Exception(f"Zamowienie ma limit na {Order.MAX_ELEMENTS_NUMBER} elementow.")
+
+    def add_product_to_order(self, product, quantity):
+        if len(self._order_elements) < Order.MAX_ELEMENTS_NUMBER:
+            new_element = OrderElement(product, quantity)
+            self._order_elements.append(new_element)
+        else:
+            raise Exception("Osiagnieto limit pozycji w zamowieniu.")
 
     def __str__(self):
         return_string = "="*20+"\n"

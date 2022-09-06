@@ -3,7 +3,7 @@ from shop.discount_policy import PercentageDiscount, AbsoluteDiscount
 from shop.order import Order
 
 def run_homework():
-    order_elements = data_generator.generate_order_elements()
+    order_elements = data_generator.generate_order_elements(number_of_products=200)
     my_order = Order("Bob", "Kowalski", order_elements=order_elements)
     print(my_order)
 
