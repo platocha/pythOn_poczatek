@@ -1,18 +1,9 @@
-from estudent.subject import Subject
-from estudent.grade import Grade, FinalGrade
+from estudent.data_generator import generate_students
+from estudent.school import School
 def run_example():
-    best_grade = Grade(value=6)
-    failing_grade = Grade(value=1)
-    print(best_grade)
-    print(failing_grade)
-    print(best_grade.is_passing())
-    print(failing_grade.is_passing())
-
-    math = Subject(identifier=1, name="Matematyka")
-    final_grade = FinalGrade(value=4, subject=math)
-    print(final_grade)
-    math.assign_teacher("Wojciech")
-    print(math)
+    students = generate_students(number_of_students=250)
+    school = School(name="Mala szkola", students=[])
+    school.students = students
 
 
 if __name__ == '__main__':
