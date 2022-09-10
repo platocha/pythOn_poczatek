@@ -1,6 +1,7 @@
 from shop.errors import TemporaryOutOfStock, ProductNotAvailable, NotValidInput
 from shop.order import Order
 from shop.store import Store
+import os
 
 
 def handle_customer():
@@ -9,6 +10,7 @@ def handle_customer():
     while want_more_products():
         add_product_to_order(order, Store.AVAILABLE_PRODUCTS)
     print_order_summary(order)
+    save_orders_to_file(order)
 
 
 def say_hello():
@@ -73,6 +75,11 @@ def parse_quantity(quantity_str):
         raise NotValidInput("Ilosc musi byc wieksza od 0")
 
     return quantity
+
+def save_orders_to_file(order):
+    orders_data_file_path = os.path.join("data", "orders.txt")
+    with open(orders_data_file_path, mode="w") as orders_file:
+        orders_file.write(str(order))
 
 
 def print_order_summary(order):
