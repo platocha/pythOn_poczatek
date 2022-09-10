@@ -1,20 +1,24 @@
 from estudent.data_generator import generate_students
-import os
+import dataclasses
+import json
 def run_example():
-    students = generate_students()
+    students = generate_students(number_of_students=10)
 
-    students_data_file_path = os.path.join("data", "students.txt")
-    with open(students_data_file_path, mode="w") as students_file:
-        for student in students:
-            students_file.write(str(student))
-            students_file.write("\n")
+    students_data = {
+        "students": [
+            {
+                "first_name": student.first_name,
+                "last_name": student.last_name,
+                "promoted": student.promoted,
+                "final_grades": [dataclasses.asdict(grade) for grade in student.final_grades]
+            }
+            for student in students
+        ]
+    }
 
-    new_students = generate_students()
-    with open(students_data_file_path, mode="a") as students_file:
-        students_file.write("Dodatkowo dopisalismy jeszcze:\n")
-        for student in new_students:
-            students_file.write(str(student))
-            students_file.write("\n")
+    json_students = json.dumps(students_data)
+    print(json_students)
+    print(type(json_students))
 
 
 if __name__ == '__main__':

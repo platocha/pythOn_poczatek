@@ -78,8 +78,9 @@ def parse_quantity(quantity_str):
 
 def save_orders_to_file(order):
     orders_data_file_path = os.path.join("data", "orders.txt")
-    with open(orders_data_file_path, mode="w") as orders_file:
+    with open(orders_data_file_path, mode="a") as orders_file:
         orders_file.write(str(order))
+        orders_file.write("\n")
 
 
 def print_order_summary(order):
